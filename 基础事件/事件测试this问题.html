@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+		<script src="../JS/react.development.js"></script>
+		<script src="../JS/react-dom.development.js"></script>
+		<script src="../JS/babel.min.js"></script>
+</head>
+<body>
+	<div id="box1">
+
+	</div>
+</body>
+<script type="text/babel">
+	class Student extends React.Component{
+		/* constructor(props){
+			super(props)
+		} */
+		state = {ishot:true}//放到成员变量上
+		wearthday =()=>{
+			const ishot = this.state.ishot;
+			this.setState({ishot:!ishot});
+		}
+		render() {
+			const {ishot} =  this.state;
+			return <h1 onClick={this.wearthday}>测试一下{ishot ? "热的":"冷的"}</h1>
+		}
+	}
+	ReactDOM.render(<Student/>,document.getElementById('box1'));
+</script>
+</html>
