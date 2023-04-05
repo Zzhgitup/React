@@ -8,6 +8,7 @@
 	<script src="../JS/react.development.js"></script>
 	<script src="../JS/react-dom.development.js"></script>
 	<script src="../JS/babel.min.js"></script>
+	<script src="../JS/prop-types.js"></script>
 </head>
 <body>
 	<div id="boxine">
@@ -16,17 +17,30 @@
 </body>
 <script type="text/babel">
 	class Perspon extends React.Component{
-		state={name:"张三",sex:"男",age:"12"}
+/* 		state={name:"张三",sex:"男",age:"12"}//固定值  不实用 */
 		render(){
+			const {name,age,sex} = this.props
 			return (
 				<ul>
-					<li>姓名：{this.state.name}</li>
-					<li>性别：{this.state.sex}</li>
-					<li>年龄：{this.state.age}</li>
+					<li>姓名：{name}</li>
+					<li>性别：{sex}</li>
+					<li>年龄：{age}</li>
 				</ul>
 			)
 		}
 	}
-	ReactDOM.render(<Perspon/>,document.getElementById("boxine"));
+	//规则
+	Perspon.propTypes = {
+		name:PropTypes.string.isRequired,
+		age:PropTypes.string.isRequired,
+	}
+	//默认值
+	Perspon.defaultProps = {
+		name:"默认名字",
+		age:"0",
+		sex:"不男不女"
+	}
+	let p = {name:"赵子豪",age:"21",sex:"男"};//批量传递
+	ReactDOM.render(<Perspon {...p} />,document.getElementById("boxine"));
 </script>
 </html>
