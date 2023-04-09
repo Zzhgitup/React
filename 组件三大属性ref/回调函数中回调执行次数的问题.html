@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>回调函数式ref</title>
+	<script src="../JS/react.development.js"></script>
+	<script src="../JS/react-dom.development.js"></script>
+	<script src="../JS/babel.min.js"></script>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+</body>
+<script type="text/babel">
+	class Person extends React.Component{
+		state={shinfo:false}
+		showinfo=()=>{
+			console.log(this.input.value);
+			const {shinfo}  = this.state
+			this.setState({shinfo:!shinfo});
+		}
+		saveinput=(a)=>{this.input = a;console.log("@",a);}
+		render(){
+			/* const {shinfo}  = this.state */
+			return (
+				<div>
+					<h1>今天天气很{this.state.shinfo? "凉爽":"炎热"}</h1>
+					<input ref={this.saveinput} type="text"/>
+					<button onClick={this.showinfo}>点我输出输入的数据</button>	
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<Person/>,document.getElementById("box"));
+</script>
+</html>
