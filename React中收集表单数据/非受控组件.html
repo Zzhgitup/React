@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../JS/react.development.js"></script>
+	<script src="../JS/react-dom.development.js"></script>
+	<script src="../JS/babel.min.js"></script>
+</head>
+<body>
+	<div id="box1">
+
+	</div>
+</body>
+<script type="text/babel">
+	class Login extends React.Component{
+		username = React.createRef();
+		password = React.createRef();
+		login = (event)=>{
+			event.preventDefault();//取消默认行为
+			alert(`你的账号是${this.username.current.value}  你的密码${this.password.current.value}`)
+		}
+		render(){
+			return (
+				<div>
+					<form  onSubmit={this.login}>
+						<label for="username">用户名</label>
+						<input name="username" ref={this.username} type="text"/>
+						<label for="password">密码</label>
+						<input name="password" ref={this.password} type="text"/>
+						<button>登录</button>
+					</form>
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<Login/>,document.getElementById("box1"));
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../JS/react.development.js"></script>
+	<script src="../JS/react-dom.development.js"></script>
+	<script src="../JS/babel.min.js"></script>
+</head>
+<body>
+	<div id="box1">
+
+	</div>
+</body>
+<script type="text/babel">
+	class Login extends React.Component{
+		state = {
+			password:"",
+			username:""
+		}
+		login = ()=>{
+			const {username,password} = this.state;
+			console.log(username,password);
+		}
+		username1 = (event)=>{
+			this.setState({username:event.target.value})
+		}
+
+		password = ()=>{
+			this.setState({password:event.target.value})
+		}
+		render(){
+			return (
+				<div>
+					<form action="" ref={this.formuser}>
+						<label for="username">用户名</label>
+						<input onChange={this.username1} name="username" type="text"/>
+						<label for="password">密码</label>
+						<input onChange={this.password} name="password" type="text"/>
+						<button onClick={this.login} type="button">登录</button>
+					</form>
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<Login/>,document.getElementById("box1"));
+</script>
+</html>

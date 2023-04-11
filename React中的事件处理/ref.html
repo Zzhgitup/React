@@ -16,16 +16,17 @@
 </body>
 <script type="text/babel">
 	class Person extends React.Component{
-		/*
-			React.createRef调用后可以返回一个容器
-			，该容器可以储存被ref标识的元素
-			专人专用，只能存一个
+		//创建Ref容器.
+		/* 
+			React中的事件都是被重新写过的，自定义合成事件，为的是更好的兼容性
+			（1）. 通过event.target得到发生时间的DOM元素（委托给了最外层元素）
+			通过事件监听来实现，
+			（2） 不要过度的使用ref。可以通过event.target得到元素
 		*/
 		myref = React.createRef();
 		showinfo=()=>{
-			console.log(this.myref);
-			console.log(this.myref.value);
-			const {shinfo}  = this.state
+			console.log(this.myref.current);
+			console.log(this.myref.current.value);
 		}
 		render(){
 			/* const {shinfo}  = this.state */
