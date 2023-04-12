@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../JS/react.development.js"></script>
+	<script src="../JS/react-dom.development.js"></script>
+	<script src="../JS/babel.min.js"></script>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+</body>
+<script type="text/babel">
+	class ShowingHiding extends React.Component{
+		state = {opacity:0.5}
+		h2 = React.createRef();
+		componentDidMount(){//挂载完毕钩子
+			this.timer = setInterval(()=>{
+				let {opacity} = this.state;
+				opacity -=0.1;
+				this.setState({opacity:opacity});
+				if(opacity<=0){
+					this.setState({opacity:1});
+				}
+			},200);
+		}
+		//将要被卸载之前
+		componentWillUnmount(){
+			//清除定时器
+			clearInterval(this.timer);
+		}
+		stop = ()=>{
+			//卸载组件
+			ReactDOM.unmountComponentAtNode(document.getElementById('box'));
+		}
+		render(){
+			return (
+				<div>
+					<h2 style={{opacity:this.state.opacity}} ref={this.h2}>显示与隐藏</h2>
+					<button onClick={this.stop}>关闭</button>
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<ShowingHiding/>,document.getElementById("box"));
+</script>
+</html>

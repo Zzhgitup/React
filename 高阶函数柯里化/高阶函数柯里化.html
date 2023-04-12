@@ -24,20 +24,26 @@
 				const {username,password} = this.state;
 				console.log(username,password);
 			}
-		/* 	username1 = (event)=>{
+			/*username1 = (event)=>{
 				this.setState({username:event.target.value})
 			}
-
 			password = ()=>{
 				this.setState({password:event.target.value})
 			} */
+			/* 
+			高阶函数定义
+			1.若A函数，接受的参数是一个函数则A为高阶函数
+			2.若A函数的返回值是一个函数，则A是高阶函数
+			常见的高阶函数：bind call Promise arr.map  filter 
+			定时器，
+			*/
 			//柯里化
 			saveform = (params)=>{
 				return (event)=> {
 					this.setState({[params]:event.target.value});
 				}
 			}
-		render(){
+			render(){
 			return (
 				<div>
 					<form action="" ref={this.formuser}>
