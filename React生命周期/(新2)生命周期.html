@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<script src="../JS/react.development.js"></script>
-	<script src="../JS/react-dom.development.js"></script>
-	<script src="../JS/babel.min.js"></script>
+	<script src="../newJS/react.development.js"></script>
+	<script src="../newJS/react-dom.development.js"></script>
+	<script src="../newJS/babel.min.js"></script>
 </head>
-
 <body>
 	<div id="box">
 
@@ -26,8 +24,15 @@
 			const { num } = this.state;
 			this.setState({ num: num + 1 });
 		}
-		componentWillMount() {
+		static getDerivedStateFromProps(){
+			console.log("此钩子getDerivedStateFromPorps");
+			return {num:200};	
+		}
+		UNSAFE_componentWillMount() {
 			console.log("组件将要被挂载");
+		}
+		componentDidMount(){
+			console.log("组件挂载完毕");
 		}
 		componentWillUnmount() {
 			console.log("组件将要被卸载");
@@ -36,7 +41,7 @@
 			console.log("组件应该被更新");
 			return true;
 		}
-		componentWillUpdate() {// 更新前
+		UNSAFE_componentWillUpdate() {// 更新前
 			console.log("组件将要被更新");
 			return true
 		}
@@ -58,37 +63,6 @@
 			)
 		}
 	}
-	class A extends React.Component {
-		state = { carname: "奔驰" }
-		huanche = () => {
-			this.setState({ carname: "奥迪" })
-		}
-		render() {
-			return (
-				<div>
-					<p>
-						我是A组件
-						<button onClick={this.huanche}>换车</button>
-					</p>
-					<B carname={this.state.carname} />
-				</div>
-			)
-		}
-	}
-	class B extends React.Component {
-		//第一次接收不算，第二次接受才会触发这个函数
-		componentWillReceiveProps(){
-			console.log("接受道Props参数");
-		}
-		render() {
-			return (
-				<div>
-					<p>{this.props.carname}</p>
-				</div>
-			)
-		}
-	}
-	ReactDOM.render(<A />, document.getElementById("box"));
+	ReactDOM.render(<ShowingHiding/>,document.getElementById("box"));
 </script>
-
 </html>

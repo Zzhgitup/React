@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="../newJS/react.development.js"></script>
+	<script src="../newJS/react-dom.development.js"></script>
+	<script src="../newJS/babel.min.js"></script>
+	<style>
+		.list{
+			width: 300px;
+			background-color: antiquewhite;
+			height: 200px;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+</body>
+<script type="text/babel">
+	class ShowingHiding extends React.Component {
+		box = React.createRef();
+		state = {news:["新闻"]}
+		getSnapshotBeforeUpdate(){//更新前的数据
+			return this.box.current.scrollHeight;
+		}
+		componentDidUpdate(preprops,state,height){
+			this.box.current.scrollTop+=(this.box.current.scrollHeight-height);
+		}
+		componentDidMount(){
+			setInterval(()=>{
+				const {news} = this.state;
+				news.unshift("新闻"+(news.length+1));
+				this.setState({news:news})
+			},1000)
+		}
+		render() {
+			return (
+				<div className="list" ref={this.box}>
+					{
+						this.state.news.map((e,index)=>{
+							return <p key={index} >{e}</p>
+						})
+					}
+				</div>
+			)
+		}
+	}
+	ReactDOM.render(<ShowingHiding/>,document.getElementById("box"));
+</script>
+</html>
